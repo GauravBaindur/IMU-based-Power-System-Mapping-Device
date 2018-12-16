@@ -76,6 +76,18 @@ void setup()
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
+
+  int CS=10;
+  pinMode(CS,OUTPUT);
+  if(!SD.begin(CS))
+  {
+    Serial.println("SD card not ready");
+    return;
+  }
+  else
+  {
+    Serial.println("SD card is ready");
+  }
 }
 
 //ADD ALL CORRECT DISPLAY TEXTS FOR OLED DISPLAY AT APPROPRIATE LOCATIONS FOR OPTIONS
@@ -180,7 +192,17 @@ void IMU_Cal2()
         Serial.println(lo2*180/3.14159,6);
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("Latitiude and Longitude Marked :", la2+","+lo2);
+        display.println("Latitiude and Longitude Marked :");
+        display.println(String(la2));
+        display.println(String(lo2));
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString=String(la2)+" "+String(lo2);
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }
         delay(1000);
 }
 
@@ -198,7 +220,15 @@ void Transformer()
         Serial.println("315 MVA, 765/400/33 kV, YNa0d11, 3 Winding Auto Transformer");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("315 MVA, 765/400/33 kV, YNa0d11, 3 Winding Auto Transformer");         
+        display.println("315 MVA, 765/400/33 kV, YNa0d11, 3 Winding Auto Transformer");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="315 MVA, 765/400/33 kV, YNa0d11, 3 Winding Auto Transformer";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }
     case '2':
@@ -206,7 +236,15 @@ void Transformer()
         Serial.println("100 MVA, 220/110/11 kV, YNyn0d11, 3 Winding Transformer");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("100 MVA, 220/110/11 kV, YNyn0d11, 3 Winding Transformer");         
+        display.println("100 MVA, 220/110/11 kV, YNyn0d11, 3 Winding Transformer");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="100 MVA, 220/110/11 kV, YNyn0d11, 3 Winding Transformer";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }                  
         break;
       }
     case '3':
@@ -214,7 +252,15 @@ void Transformer()
         Serial.println("20 MVA, 132/66 kV, YNyn0, 2 Winding Transformer");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("20 MVA, 132/66 kV, YNyn0, 2 Winding Transformer");         
+        display.println("20 MVA, 132/66 kV, YNyn0, 2 Winding Transformer");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="20 MVA, 132/66 kV, YNyn0, 2 Winding Transformer";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }                        
         break;
       }
     case '4':
@@ -222,7 +268,15 @@ void Transformer()
         Serial.println("0.25 MVA, 15.75/0.415 kV, Dyn1, 2 Winding Transformer");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("0.25 MVA, 15.75/0.415 kV, Dyn1, 2 Winding Transformer");         
+        display.println("0.25 MVA, 15.75/0.415 kV, Dyn1, 2 Winding Transformer");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="0.25 MVA, 15.75/0.415 kV, Dyn1, 2 Winding Transformer";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }                
    }
@@ -242,7 +296,15 @@ void TransmissionLine()
         Serial.println("4040MW, 765kV, ACSR Quad MOOSE Conductor, 800A ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("4040MW, 765kV, ACSR Quad MOOSE Conductor, 800A ");         
+        display.println("4040MW, 765kV, ACSR Quad MOOSE Conductor, 800A ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="4040MW, 765kV, ACSR Quad MOOSE Conductor, 800A ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }                 
         break;
       }
     case '2':
@@ -250,7 +312,15 @@ void TransmissionLine()
         Serial.println("240MW, 220kV, ACSR ZEBRA Conductor, 635A ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("240MW, 220kV, ACSR ZEBRA Conductor, 635A ");         
+        display.println("240MW, 220kV, ACSR ZEBRA Conductor, 635A ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="240MW, 220kV, ACSR ZEBRA Conductor, 635A ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }                 
         break;
       }
     case '3':
@@ -258,7 +328,15 @@ void TransmissionLine()
         Serial.println("35MW, 66kV, ACSR COYOTE Conductor, 311A ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("35MW, 66kV, ACSR COYOTE Conductor, 311A ");         
+        display.println("35MW, 66kV, ACSR COYOTE Conductor, 311A ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="35MW, 66kV, ACSR COYOTE Conductor, 311A ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }                 
         break;
       }
     case '4':
@@ -266,7 +344,15 @@ void TransmissionLine()
         Serial.println("5MW, 11kV, ACSR DOG Conductor, 300A ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("5MW, 11kV, ACSR DOG Conductor, 300A ");         
+        display.println("5MW, 11kV, ACSR DOG Conductor, 300A ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="5MW, 11kV, ACSR DOG Conductor, 300A ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }                 
         break;
       }                
    }
@@ -286,7 +372,15 @@ void Generator()
         Serial.println("3x800MW, 23.5kV, 0.9pf, Thermal "); //Kudgi
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("3x800MW, 23.5kV, 0.9pf, Thermal "); 
+        display.println("3x800MW, 23.5kV, 0.9pf, Thermal ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="3x800MW, 23.5kV, 0.9pf, Thermal ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        } 
         break;
       }
     case '2':
@@ -295,6 +389,14 @@ void Generator()
         display.clearDisplay();
         display.setCursor(0,0);
         display.println("10x103.5MW, 11kV, 0.9pf, Hydro ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="10x103.5MW, 11kV, 0.9pf, Hydro ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }
     case '3':
@@ -303,6 +405,14 @@ void Generator()
         display.clearDisplay();
         display.setCursor(0,0);
         display.println("4x220MW, 15.75kV, 0.9pf, Nuclear ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="4x220MW, 15.75kV, 0.9pf, Nuclear ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }
     case '4':
@@ -311,9 +421,18 @@ void Generator()
         display.clearDisplay();
         display.setCursor(0,0);
         display.println("2000MW, 6.9kV, 0.9pf, Solar ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="2000MW, 6.9kV, 0.9pf, Solar ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }                
    }
+}
 void Load()
 {
   Serial.println("Please enter the MW rating, kV rating, power factor and type of load");
@@ -328,7 +447,15 @@ void Load()
         Serial.println("5MW, 22kV, 0.85pf, Traction Load (Unbalanced) ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("5MW, 22kV, 0.85pf, Traction Load (Unbalanced) "); 
+        display.println("5MW, 22kV, 0.85pf, Traction Load (Unbalanced) ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="5MW, 22kV, 0.85pf, Traction Load (Unbalanced) ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }
     case '2':
@@ -336,7 +463,15 @@ void Load()
         Serial.println("2MW, 11kV, 0.9pf, Cement Plant "); 
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("2MW, 11kV, 0.9pf, Cement Plant"); 
+        display.println("2MW, 11kV, 0.9pf, Cement Plant");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="2MW, 11kV, 0.9pf, Cement Plant";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }
     case '3':
@@ -344,7 +479,15 @@ void Load()
         Serial.println("1MW, 6.9kV, 0.95pf, Synchronous Motor ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("1MW, 6.9kV, 0.95pf, Synchronous Motor "); 
+        display.println("1MW, 6.9kV, 0.95pf, Synchronous Motor ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="1MW, 6.9kV, 0.95pf, Synchronous Motor ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }
     case '4':
@@ -352,7 +495,15 @@ void Load()
         Serial.println("0.25MW, 0.433kV, 0.9pf, SAT ");
         display.clearDisplay();
         display.setCursor(0,0);
-        display.println("0.25MW, 0.433kV, 0.9pf, SAT "); 
+        display.println("0.25MW, 0.433kV, 0.9pf, SAT ");
+        File dataFile=SD.open("Power System map.txt",FILE_WRITE);
+        String dataString="0.25MW, 0.433kV, 0.9pf, SAT ";
+        if(dataFile)
+        {
+          dataFile.println(dataString);
+          dataFile.close();
+          Serial.println(dataString);
+        }         
         break;
       }                
    }  
