@@ -169,17 +169,62 @@ void IMU_Cal2()
         // read the sensor
         IMU.readSensor();
         // Calibration of IMU with soft and hard iron calibration
-        
+        float X = IMU.getMagX_uT();
+        float Y = IMU.getMagY_uT();
+        float Z = IMU.getMagZ_uT();
+        float max_x, min_x;
+        float max_y, min_y;
+        float max_z, min_z;
+        float temp_x = X; float temp_y= Y; float temp_z= Z;
+        for(int i = 0; i < 127; i++)
+        {
+          float X = IMU.getMagX_uT();
+          float Y = IMU.getMagY_uT();
+          float Z = IMU.getMagZ_uT();
+          if(X < temp_x)
+          {
+            min_x=X;
+          }
+          else
+          {
+            max_x=X;
+          }
+          float temp_x = X;
+          if(Y < temp_y)
+          {
+            min_y=Y;
+          }
+          else
+          {
+            max_y=Y;
+          }
+          float temp_y = Y;
+          if(Z < temp_z)
+          {
+            min_z=Z;
+          }
+          else
+          {
+            max_z=Z;
+          }
+          float temp_z= Z;          
+        }
+        float x_bias = (max_x+min_x)/2;
+        float y_bias = (max_y+min_y)/2;
+        float z_bias = (max_z+min_z)/2;
+        X=X-x_bias;
+        Y=Y-y_bias;
+        Z=Z-z_bias;
         // display the data
         Serial.print("MagX: ");  
-        Serial.print(IMU.getMagX_uT(),6);
+        Serial.print(X,6);
         Serial.print("  ");  
         Serial.print("MagY: ");
-        Serial.print(IMU.getMagY_uT(),6);
+        Serial.print(Y,6);
         Serial.print("  ");
         Serial.print("MagZ: ");  
-        Serial.println(IMU.getMagZ_uT(),6);
-        double heading = atan2(IMU.getMagY_uT(),IMU.getMagX_uT());
+        Serial.println(Z,6);
+        double heading = atan2(Y,X);
         if(heading<0)
         {
           heading=heading+2*3.14159;
